@@ -1,0 +1,32 @@
+import wikipedia
+import nltk
+
+#print(wikipedia.search('Vincent'))
+
+'''
+person=input("PLEASE ENTER A PERSON TO SEARCH")
+if (wikipedia.search(person))== None:
+    print("NO WIKIPEDIA PAGE EXISTS ON THAT PERSON")
+'''
+summary=(wikipedia.summary("Vincent Van Gogh")) #this returns a list of characters
+words= summary.split()#returns a list split based on white space
+
+print(len(words))
+
+
+#eliminate most common words... as words with the highest count are insignificant
+word_freq={}
+for word in words:
+    if word in word_freq:
+        word_freq[word]+=1
+    else:
+        word_freq[word]=1
+
+#print(word_freq)
+unique=[]
+for word, freq in word_freq.items():
+    if freq > 1:
+        print(word)
+    else:
+        unique.append(word)
+        
