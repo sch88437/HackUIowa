@@ -11,6 +11,19 @@ if (wikipedia.search(person))== None:
 summary=(wikipedia.summary("Vincent Van Gogh")) #this returns a list of characters
 words= summary.split()#returns a list split based on white space
 
+summary=(wikipedia.summary("walter white")) #this returns a list of characters
+words= summary.split()#returns a list split based on white space
+
+adjectives_or_nouns=[]
+for word in words:
+    if((len(wn.synsets(word)) > 0) and (wn.synsets(word)[0].pos()=='a' or wn.synsets(word)[0].pos()=='n')):
+        #adjectives.append(wn.synsets(word))
+        adjectives_or_nouns.append(word)
+print(len(adjectives_or_nouns))
+
+print(len(set(adjectives_or_nouns)))
+print((adjectives_or_nouns))
+
 
 exampleList=['hot','coffee','bitter','caffeine']
 print(wn.synsets(exampleList[1]))
