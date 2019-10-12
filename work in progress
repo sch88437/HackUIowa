@@ -1,6 +1,6 @@
 import wikipedia
 import nltk
-
+from nltk.corpus import wordnet as wn
 #print(wikipedia.search('Vincent'))
 
 '''
@@ -13,7 +13,18 @@ words= summary.split()#returns a list split based on white space
 
 print(len(words))
 
+pos_all=dict()
+for w in words:
+    pos_l=set()
+    for tmp in wn.synsets(w):
+        if tmp.name().split('.')[0]==w:
+            pos_l.add(tmp.pos())
+        pos_all[w]=pos_l
+print(pos_all)
 
+#sentences= nltk.sent_tokenize(summary)
+#print(sentences)
+'''
 #eliminate most common words... as words with the highest count are insignificant
 word_freq={}
 for word in words:
@@ -30,3 +41,4 @@ for word, freq in word_freq.items():
     else:
         unique.append(word)
         
+'''
