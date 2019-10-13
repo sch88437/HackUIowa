@@ -1,0 +1,63 @@
+import wikipedia
+import nltk
+from nltk.corpus import wordnet as wn
+
+class DictionaryMaker:
+
+    def __init__(self, name):
+        self.name=name #the name of the wiki page
+    
+    def getDictionary(self):
+        summary=wikipedia.summary(self.name)#returns string
+        if(summary==None):
+            return
+        words = summary.split() #returns list of words
+
+        adj=set()
+        noun=set()
+        for word in words:
+            if((len(wn.synsets(word))>0) and (wn.synsets(word)[0].pos()=='a')):
+                if(len(word)>2 and not(word[0].isupper())):
+                    adj.add(word)
+            elif ((len(wn.synsets(word))>0) and (wn.synsets(word)[0].pos()=='n')):
+                if(len(word)>2 and not (word[0].isupper())):
+                    noun.add(word)
+
+
+        sentences=summary.split('.')
+
+        freq_score={} #log(frequency of term / num sentences containing term)
+
+        for sentence in sentences:
+            for a in adj:
+                if a in sentence:
+                    if a in freq_score:
+                        freq_score[a]+=1
+                    else:
+                        freq_score[a]=1
+            for n in noun:
+                if n in sentence:
+                    if n in freq_score:
+                        freq_score[n]+=1
+                    else:
+                        freq_score[n]=1
+        sortedDictionary=sorted(freq_score.items(), key=lambda x: x[1], reverse=True)
+
+        return sortedDictionary
+
+    def getList(self):
+        listy=[]
+        keys=self.getDictionary()
+        for key in keys:
+            listy.append(key[0])
+        return listy
+    
+        #return list(set(self.getDictionary().keys()))
+#        sortedDictionary=sorted(freq_score.items(), key=lambda x: x[1], reverse=True)
+        #print(len(sortD))
+        #print(sortD)
+
+#d=DictionaryMaker('van gogh')
+#print(d.getDictionary())
+
+#print(DictionaryMaker("vincent van gogh").getList())
