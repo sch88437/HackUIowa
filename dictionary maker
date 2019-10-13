@@ -9,6 +9,8 @@ class DictionaryMaker:
     
     def getDictionary(self):
         summary=wikipedia.summary(self.name)#returns string
+        if(summary==None):
+            return
         words = summary.split() #returns list of words
 
         adj=set()
@@ -39,11 +41,22 @@ class DictionaryMaker:
                         freq_score[n]+=1
                     else:
                         freq_score[n]=1
-                
-#print(freq_score)
         sortedDictionary=sorted(freq_score.items(), key=lambda x: x[1], reverse=True)
+
+        return sortedDictionary
+
+    def getList(self):
+        listy=[]
+        keys=self.getDictionary()
+        for key in keys:
+            listy.append(key[0])
+        return listy
+        #return list(set(self.getDictionary().keys()))
+#        sortedDictionary=sorted(freq_score.items(), key=lambda x: x[1], reverse=True)
         #print(len(sortD))
         #print(sortD)
-        return sortedDictionary
+
 #d=DictionaryMaker('van gogh')
 #print(d.getDictionary())
+
+#print(DictionaryMaker("vincent van gogh").getList())
