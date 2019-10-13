@@ -2,7 +2,7 @@ import wikipedia
 import nltk
 from nltk.corpus import wordnet as wn
 
-class PersonalityDictionary:
+class FileMaker:
 
     def __init__(self,name):
         self.name=name
@@ -12,7 +12,7 @@ class PersonalityDictionary:
         file = open(self.file,'r')
         listy=[]
         for line in file:
-            listy.append(line.split)
+            #print(line)
+            listy.append(line)
         return listy
-    
     
