@@ -1,0 +1,17 @@
+
+import wikipedia
+import nltk
+from nltk.corpus import wordnet as wn
+from PersonalityDictionary import PersonalityDictionary
+from DictionaryMaker import DictionaryMaker
+
+p = PersonalityDictionary('INTJ')
+people=p.makeList()
+dictionaries=[]
+
+for person in people:
+    d = DictionaryMaker(person)
+    dictionaries.append(d.getDictionary)
+
+print(len(dictionaries))
+print(dictionaries[0])
