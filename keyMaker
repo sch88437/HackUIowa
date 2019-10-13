@@ -1,0 +1,30 @@
+import wikipedia
+import nltk
+from nltk.corpus import wordnet as wn
+from FileMaker import FileMaker
+from DictionaryMaker import DictionaryMaker
+
+p = FileMaker('INTJ')
+people=p.makeList()
+print(people)
+
+dictionaries=[]
+for person in people:
+    dictionaries.append(DictionaryMaker(person).getList())
+
+#print(dictionaries)
+m=[j for i in dictionaries for j in i]
+#print(set(master))
+master=[]
+for i in range (50):
+    master.append(m[i])
+
+print(master)
+
+INTJdictionary=open('INTJdictionary.txt','w')
+for m in master:
+    INTJdictionary.write(m)
+    INTJdictionary.write('\n')
+    
+INTJdictionary.close()
+
