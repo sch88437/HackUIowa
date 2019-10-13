@@ -1,0 +1,18 @@
+import wikipedia
+import nltk
+from nltk.corpus import wordnet as wn
+
+class PersonalityDictionary:
+
+    def __init__(self,name):
+        self.name=name
+        self.file=name+'.txt'
+
+    def makeList(self):
+        file = open(self.file,'r')
+        listy=[]
+        for line in file:
+            listy.append(line.split)
+        return listy
+    
+    
